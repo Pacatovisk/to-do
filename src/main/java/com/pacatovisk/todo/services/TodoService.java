@@ -37,4 +37,8 @@ public class TodoService {
     public Todo create(Todo obj) {
         return todoRepository.save(obj);
     }
+
+    public void delete(Integer id) {
+        todoRepository.deleteById(id);
+    }
 }
