@@ -23,18 +23,15 @@ public class TodoService {
     }
 
     public List<Todo> findAllOpen() {
-        List<Todo> list = todoRepository.findAllOpen();
-        return list;
+        return todoRepository.findAllOpen();
     }
 
     public List<Todo> findAllClosed(){
-        List<Todo> list = todoRepository.findAllClosed();
-        return list;
+        return todoRepository.findAllClosed();
     }
 
     public List<Todo> findAll(){
-        List<Todo> list = todoRepository.findAll();
-        return list;
+        return todoRepository.findAll();
     }
 
     public Todo create(Todo obj) {
@@ -43,5 +40,14 @@ public class TodoService {
 
     public void delete(Integer id) {
         todoRepository.deleteById(id);
+    }
+
+    public Todo update(Integer id, Todo obj) {
+        Todo newObj = findById(id);
+        newObj.setTitulo(obj.getTitulo());
+        newObj.setDataParaFinalizar(obj.getDataParaFinalizar());
+        newObj.setDescricao(obj.getDescricao());
+        newObj.setFinalizado(obj.getFinalizado());
+        return todoRepository.save(newObj);
     }
 }
