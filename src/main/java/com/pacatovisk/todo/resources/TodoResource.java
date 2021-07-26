@@ -3,6 +3,8 @@ package com.pacatovisk.todo.resources;
 import com.pacatovisk.todo.domain.Todo;
 import com.pacatovisk.todo.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -36,8 +38,8 @@ public class TodoResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Todo>> listAll() {
-        List<Todo> listAll = todoService.findAll();
+    public ResponseEntity<Page<Todo>> listAll(Pageable pageable) {
+        Page<Todo> listAll = todoService.findAll(pageable);
         return ResponseEntity.ok().body(listAll);
     }
 

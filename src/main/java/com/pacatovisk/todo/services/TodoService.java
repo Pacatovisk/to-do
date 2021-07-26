@@ -4,6 +4,10 @@ import com.pacatovisk.todo.domain.Todo;
 import com.pacatovisk.todo.repositories.TodoRepository;
 import com.pacatovisk.todo.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +34,8 @@ public class TodoService {
         return todoRepository.findAllClosed();
     }
 
-    public List<Todo> findAll(){
-        return todoRepository.findAll();
+    public Page<Todo> findAll(@PageableDefault(page = 0, size = 10, direction = Sort.Direction.ASC) Pageable pageable){
+        return todoRepository.findAll(pageable);
     }
 
     public Todo create(Todo obj) {
